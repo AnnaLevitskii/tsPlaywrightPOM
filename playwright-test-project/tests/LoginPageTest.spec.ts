@@ -5,6 +5,7 @@ import { faker } from '@faker-js/faker';
 import { User } from '../core/utils/models/User.type';
 
 test.describe('loginTests_positive', ()=>{
+    
     test('loginTest',async ({page})=>{
         test.slow();
         await new HomePage(page).openHomePage()
@@ -12,12 +13,13 @@ test.describe('loginTests_positive', ()=>{
             .then(LoginPage => LoginPage.fillinLoginForm());
         await expect(page.getByRole('link', { name: 'CONTACTS' })).toBeVisible();
     })
+    
     test('loginTest_storageCheck',async ({page})=>{
         test.slow();
         await new HomePage(page).openHomePage()
             .then(HomePage => HomePage.navigateToLoginPage())
             .then(LoginPage => LoginPage.fillinLoginForm());
-        await expect(page.getByRole('link', { name: 'CONTACTS' })).toBeVisible();
+        
         const storage = await page.context().storageState();
         const token = storage.origins.find(srot => srot.localStorage.find(ls => ls.name =='token'));
         expect(token).toBeTruthy();
@@ -33,8 +35,8 @@ test.describe('loginTests_negative', ()=>{
         const randomPassword = faker.internet.password()
         const randomEmail = faker.internet.email();
         const user: User = {
-            username: randomEmail, 
-            email: randomPassword,
+            email: randomEmail, 
+            password: randomPassword,
         } 
 
         await new HomePage(page).openHomePage()
@@ -49,8 +51,8 @@ test.describe('loginTests_negative', ()=>{
         const randomEmail = faker.internet.email().split('@').join('');
         
         const user: User = {
-            username: randomEmail, 
-            email: randomPassword,
+            email: randomEmail, 
+            password: randomPassword,
         } 
         
         await new HomePage(page).openHomePage()

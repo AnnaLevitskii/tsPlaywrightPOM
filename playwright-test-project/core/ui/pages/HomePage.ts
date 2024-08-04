@@ -17,4 +17,6 @@ export class HomePage extends BasePage{
         await HomePage.headerMenuNavigate(HeaderMenu.Login);
         return new LoginPage(this.page);
     }
+
+ 
 }

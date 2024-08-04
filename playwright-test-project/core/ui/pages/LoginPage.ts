@@ -6,6 +6,7 @@ import { faker } from '@faker-js/faker';
 import { User } from "../../utils/models/User.type";
 import { throws } from "assert";
 
+
 export class LoginPage extends BasePage{
     constructor(public page: Page){
         super(page);
@@ -18,16 +19,16 @@ export class LoginPage extends BasePage{
         return new ContactsPage(this.page);
     }
 
+
     async fillinLoginForm_negative(user: User): Promise<ContactsPage> {
         await this.page.getByPlaceholder('Email').fill(user.email);
-        await this.page.getByPlaceholder('Password').fill(user.email);
+        await this.page.getByPlaceholder('Password').fill(user.password);
         await this.page.getByRole('button', {name: 'Login'}).click();
         return new ContactsPage(this.page);
     }
-
     
     
-    async trowsError() {
+    trowsError(): never{
         throw new Error("My error"); 
     }
 
