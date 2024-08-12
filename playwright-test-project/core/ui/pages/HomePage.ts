@@ -3,6 +3,7 @@ import { BasePage } from "./BasePage";
 import * as config from '../../../core/utils/resources/config.json';
 import { HeaderMenu } from "../../utils/models/HeaderMenu.enum";
 import { LoginPage } from "./LoginPage";
+import fs from 'fs';
 
 export class HomePage extends BasePage{
     constructor(public page: Page){
@@ -17,6 +18,8 @@ export class HomePage extends BasePage{
         await HomePage.headerMenuNavigate(HeaderMenu.Login);
         return new LoginPage(this.page);
     }
-
- 
+    async screenshotHomePage(): Promise<Buffer>{
+        const screenshot = await this.page.screenshot();
+        return screenshot;
+    }
 }

@@ -5,7 +5,7 @@ import { faker } from '@faker-js/faker';
 import { User } from '../core/utils/models/User.type';
 
 test.describe('loginTests_positive', ()=>{
-    
+
     test('loginTest',async ({page})=>{
         test.slow();
         await new HomePage(page).openHomePage()
